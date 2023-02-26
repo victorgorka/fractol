@@ -32,8 +32,9 @@ int32_t	main(void)
 {
 	mlx_t	*mlx;
 
-	if (!(mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
-		return(EXIT_FAILURE);
+	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	if (!mlx)
+		return (EXIT_FAILURE);
 	img = mlx_new_image(mlx, 128, 128);
 	memset(img->pixels, 255, img->width * img->height * sizeof(int));
 	mlx_image_to_window(mlx, img, 0, 0);
