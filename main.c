@@ -3,13 +3,7 @@
 // See README in the root project for more information.
 // -----------------------------------------------------------------------------
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include "MLX42/include/MLX42/MLX42.h"
-#define WIDTH 512
-#define HEIGHT 512
-
+#include "fractol.h"
 static mlx_image_t* img;
 
 void hook(void* param)
@@ -35,8 +29,8 @@ int32_t	main(void)
 	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	if (!mlx)
 		return (EXIT_FAILURE);
-	img = mlx_new_image(mlx, 128, 128);
-	memset(img->pixels, 255, img->width * img->height * sizeof(int));
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int));
 	mlx_image_to_window(mlx, img, 0, 0);
 	mlx_loop_hook(mlx, &hook, mlx);
 	mlx_loop(mlx);
