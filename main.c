@@ -4,35 +4,40 @@
 // -----------------------------------------------------------------------------
 
 #include "fractol.h"
-static mlx_image_t* img;
 
-void hook(void* param)
+void	mandelbrot(t_data *data)
 {
-	mlx_t* mlx = param;
-
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		img->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		img->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		img->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		img->instances[0].x += 5;
+	int i = 0;
+	float c_r = -0.77;
+	float c_i = 0.53;
+	float tmp_r;
+	data->z_r = c_r;
+	data->z_i = c_i;
+	while (i < 500)
+	{
+		tmp_r = (data->z_r * data->z_r) - (data->z_i * data->z_i) + c_r;
+		data->z_i = 2 * data->z_r * data->z_i + c_i;
+		data->z_r = tmp_r;
+		printf("iter: %d, coords: %f %fi\n", i, data->z_r, data->z_i);
+		if ((data->z_r * data->z_r) + (data->z_i * data->z_i) > 4)
+			printf("No pertenece al conjunto\n");
+		i++;
+	}
 }
 
 int32_t	main(void)
 {
-	mlx_t	*mlx;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_data		data;
 
 	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	if (!mlx)
 		return (EXIT_FAILURE);
 	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int));
+	mandelbrot(&data);
 	mlx_image_to_window(mlx, img, 0, 0);
-	mlx_loop_hook(mlx, &hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
