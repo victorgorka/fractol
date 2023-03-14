@@ -1,45 +1,71 @@
-// -----------------------------------------------------------------------------
-// Codam Coding College, Amsterdam @ 2022-2023 by W2Wizard.
-// See README in the root project for more information.
-// -----------------------------------------------------------------------------
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
+/*   Updated: 2023/03/14 17:55:58 by vde-prad         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include "MLX42/include/MLX42/MLX42.h"
-#define WIDTH 512
-#define HEIGHT 512
+#include "fractol.h"
 
-static mlx_image_t* img;
-
-void hook(void* param)
+float	ft_module(float r, float i)
 {
-	mlx_t* mlx = param;
+	return ((r * r) + (i * i));
+}
 
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
-		img->instances[0].y -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
-		img->instances[0].y += 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		img->instances[0].x -= 5;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		img->instances[0].x += 5;
+int	ft_mandelbrot(t_data *data)
+{
+	float	tmp_r;
+	int		i;
+
+	i = 0;
+	data->z_r = data->c_r;
+	data->z_i = data->c_i;
+	while (i < MAX_ITER && ft_module(data->z_r, data->z_i) < 4)
+	{
+		tmp_r = (data->z_r * data->z_r) - (data->z_i * data->z_i) + data->c_r;
+		data->z_i = 2 * data->z_r * data->z_i + data->c_i;
+		data->z_r = tmp_r;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_mandelbrot_set(t_data *data)
+{
+	data->y = 0;
+	while (data->y < HEIGHT)
+	{
+		data->x = 0;
+		while (data->x < WIDTH)
+		{
+			data->c_r = MIN_RE + data->x * (MAX_RE - MIN_RE) / (WIDTH - 1);
+			data->c_i = MAX_I - data->y * (MAX_I - MIN_I) / (HEIGHT - 1);
+			if (ft_mandelbrot(data) >= MAX_ITER - 1)
+				mlx_put_pixel(data->img, data->x, data->y, 0x000000ff);
+			data->x++;
+		}
+		data->y++;
+	}
 }
 
 int32_t	main(void)
 {
-	mlx_t	*mlx;
+	t_data		data;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
-	if (!mlx)
+	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	if (!data.mlx)
 		return (EXIT_FAILURE);
-	img = mlx_new_image(mlx, 128, 128);
-	memset(img->pixels, 255, img->width * img->height * sizeof(int));
-	mlx_image_to_window(mlx, img, 0, 0);
-	mlx_loop_hook(mlx, &hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+	ft_memset(data.img->pixels, 255,
+		data.img->width * data.img->height * sizeof(int));
+	ft_mandelbrot_set(&data);
+	mlx_image_to_window(data.mlx, data.img, 0, 0);
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }
