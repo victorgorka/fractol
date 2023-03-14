@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/10 18:38:03 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/03/14 17:17:14 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,24 @@
 # include "MLX42/include/MLX42/MLX42.h"
 
 //************************** DEFINITIONS *************************************
-# define WIDTH 1000
+# define WIDTH 1500
 # define HEIGHT 1000
+# define MAX_ITER 100
+# define MAX_RE 1.0
+# define MIN_RE -2.0
+# define MAX_I 1.0
+# define MIN_I -1.0
 
 typedef struct s_data
 {
-	float	x;
-	float	y;
-	float	z_r;
-	float	z_i;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	int			x;
+	int			y;
+	float		z_r;
+	float		z_i;
+	float		c_r;	
+	float		c_i;
 }	t_data;
 
 //*************************** FUNCTIONS **************************************
