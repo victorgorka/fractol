@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/15 15:21:02 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:30:07 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	mlx_image_t	*img;
 	int			x;
 	int			y;
+	int			color;
 	float		z_r;
 	float		z_i;
 	float		c_r;	
@@ -43,6 +44,6 @@ typedef struct s_data
 
 //*************************** FUNCTIONS **************************************
 void	ft_mandelbrot_set(t_data *data);
-int		ft_color(int i);
+int		ft_color(int i, int color);
 float	ft_module(float r, float i);
 #endif
