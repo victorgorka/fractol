@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/30 11:22:43 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:52:54 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,17 @@ int32_t	main(void)
 	t_data		data;
 
 	data.color = 0;
-	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	data.width = 1700;
+	data.height = 1500;
+	data.max_iter = 100;
+	data.max_re = 2.0;
+	data.min_re = -2.0;
+	data.max_i = 2.2;
+	data.min_i = -2.2;
+	data.mlx = mlx_init(data.width, data.height, "MLX42", true);
 	if (!data.mlx)
 		return (EXIT_FAILURE);
-	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+	data.img = mlx_new_image(data.mlx, data.width, data.height);
 	ft_memset(data.img->pixels, 255,
 		data.img->width * data.img->height * sizeof(int));
 	ft_julia_set(&data);

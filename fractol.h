@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/30 11:40:52 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:26:38 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 //************************** DEFINITIONS *************************************
 # define WIDTH 1700
 # define HEIGHT 1400
-# define MAX_ITER 100
-# define MAX_RE 1.0
+# define MAX_ITER 1500
+# define MAX_RE 2.0
 # define MIN_RE -2.0
-# define MAX_I 1.2
-# define MIN_I -1.2
+# define MAX_I 2.2
+# define MIN_I -2.2
 
 typedef struct s_data
 {
@@ -36,6 +36,13 @@ typedef struct s_data
 	int			x;
 	int			y;
 	int			color;
+	int			width;
+	int			height;
+	int			max_iter;
+	float		max_re;
+	float		min_re;
+	float		max_i;
+	float		min_i;
 	float		z_r;
 	float		z_i;
 	float		c_r;	

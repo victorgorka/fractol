@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:17:12 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/20 20:28:45 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:56:22 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	ft_mandelbrot_set(t_data *data)
 	int	i;
 
 	data->y = 0;
-	while (data->y < HEIGHT)
+	while (data->y < data.height)
 	{
 		data->x = 0;
-		while (data->x < WIDTH)
+		while (data->x < data->width)
 		{
-			data->c_r = MIN_RE + data->x * (MAX_RE - MIN_RE) / (WIDTH - 1);
-			data->c_i = MAX_I - data->y * (MAX_I - MIN_I) / (HEIGHT - 1);
+			data->z_r = data.min_re + data->x * (data->max_re - data->min_re) / (data->width - 1);
+			data->z_i = data->max_i - data->y * (data->max_i - data->min_i) / (data->height - 1);
 			i = ft_mandelbrot(data);
 			mlx_put_pixel(data->img, data->x,
 				data->y, ft_color(i, data->color));
