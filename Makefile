@@ -6,12 +6,13 @@
 #    By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 16:49:46 by vde-prad          #+#    #+#              #
-#    Updated: 2023/03/15 15:19:14 by vde-prad         ###   ########.fr        #
+#    Updated: 2023/03/30 11:24:49 by vde-prad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= 	main.c \
-			mandelbrot.c
+			mandelbrot.c \
+			julia.c
 
 OBJS	= ${SRCS:.c=.o}
 NAME	= fractol
