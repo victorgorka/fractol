@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/30 16:26:38 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:18:32 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,13 @@
 # include <math.h>
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
-
 //************************** DEFINITIONS *************************************
-# define WIDTH 1700
-# define HEIGHT 1400
-# define MAX_ITER 1500
-# define MAX_RE 2.0
-# define MIN_RE -2.0
-# define MAX_I 2.2
-# define MIN_I -2.2
-
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	char		fract_type;
+	int			julia_type;
 	int			x;
 	int			y;
 	int			color;
@@ -50,8 +43,9 @@ typedef struct s_data
 }	t_data;
 
 //*************************** FUNCTIONS **************************************
-void	ft_mandelbrot_set(t_data *data);
 int		ft_color(int i, int color);
-float	ft_module(float r, float iter);
+float	ft_module(float r, float i);
+void	ft_mandelbrot_set(t_data *data);
 void	ft_julia_set(t_data *data);
+void	ft_card_to_comp(t_data *data);
 #endif
