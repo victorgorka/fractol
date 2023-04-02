@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/31 19:22:23 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/02 20:04:41 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,58 +24,67 @@ static void	ft_key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
 	{
 		((t_data *)param)->color++;
-		ft_julia_set((t_data *)param);
+		ft_select_fractal((t_data *)param);
 	}
 }
 
 void	ft_select_fractal(t_data *data)
 {
-	char	buff[42];
-
-	read(0, buff, 42);
-	if (ft_strlen(buff) == 2 && buff[0] == 'j'
-		&& buff[1] >= '0' && buff[1] <= '4')
+	if (data->fract_type == 'm')
+		ft_mandelbrot_set(data);
+	else if (data->fract_type == 'j')
 	{
-		data->fract_type = 'j';
-		data->julia_type = ft_atoi(&buff[1]);
-	}
-	else if (ft_strlen(buff) == 1 && buff[0] == 'm')
-		data->fract_type = 'm';
-	else if (buff[0] == '' || buff[0] == NULL)
-	{
-		ft_putstr_fd("m = Mandelbrot\n j[0...5] = fractales de Julia", 1);
-		mlx_terminate(data->mlx);
-		exit(EXIT_SUCCESS);
-	}
-	else
-	{
-		ft_putstr_fd("Error, argumento no valido", 2);
-		mlx_terminate(data->mlx);
-		exit(EXIT_SUCCESS);
+		ft_set_julia(data);
+		ft_julia_set(data);
 	}
 }
 
-void	ft_exec_fractal(t_data *data)
+void	ft_check_input(t_data *data)
 {
+	char	*buff;
 
+	buff = get_next_line(0);
+	if (buff[0] == 'j' && buff[1] >= '0' && buff[1] <= '4'
+		&& ft_strlen(buff) == 3)
+	{
+		data->fract_type = 'j';
+		if (buff[1] == '0')
+			data->julia_type = 0;
+		else if (buff[1] == '1')
+			data->julia_type = 1;
+		else if (buff[1] == '2')
+			data->julia_type = 2;
+		else if (buff[1] == '3')
+			data->julia_type = 3;
+		else if (buff[1] == '4')
+			data->julia_type = 4;
+	}
+	else if (!ft_strncmp(buff, "m\n", ft_strlen(buff)))
+		data->fract_type = 'm';
+	else if (ft_strlen(buff) == 1)
+		ft_exit(0);
+	else
+		ft_exit(1);
 }
 
 void	ft_init_data(t_data *data)
 {
 	data->color = 0;
 	data->width = 1700;
-	data->height = 1500;
+	data->height = 1400;
 	data->max_iter = 100;
-	data->max_re = 2.0;
+	data->max_re = 1.0;
 	data->min_re = -2.0;
-	data->max_i = 2.2;
-	data->min_i = -2.2;
+	data->max_i = 1.2;
+	data->min_i = -1.2;
 }
 
-int32_t	main(int argc, char	**argv)
+int32_t	main(void)
 {
 	t_data		data;
 
+	ft_check_input(&data);
+	ft_init_data(&data);
 	data.mlx = mlx_init(data.width, data.height, "MLX42", true);
 	if (!data.mlx)
 		return (EXIT_FAILURE);
@@ -86,7 +95,7 @@ int32_t	main(int argc, char	**argv)
 	ft_select_fractal(&data);
 	mlx_key_hook(data.mlx, &ft_key_hook, &data);
 	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
 	atexit(leaks);
+	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }

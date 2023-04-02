@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/31 19:18:32 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:59:10 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ typedef struct s_data
 }	t_data;
 
 //*************************** FUNCTIONS **************************************
-int		ft_color(int i, int color);
+int		ft_color(int i, int color, t_data *data);
 float	ft_module(float r, float i);
 void	ft_mandelbrot_set(t_data *data);
 void	ft_julia_set(t_data *data);
 void	ft_card_to_comp(t_data *data);
+void	ft_card_to_comp_jul(t_data *data);
+void	ft_exit(int n);
+void	ft_set_julia(t_data *data);
+void	ft_select_fractal(t_data *data);
 #endif

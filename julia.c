@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:12:55 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/31 12:25:10 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:47:46 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static int	ft_julia(t_data *data)
 	int		i;
 
 	i = 0;
-	data->c_r = -0.12;
-	data->c_i = -0.77;
 	while (i < data->max_iter && ft_module(data->z_r, data->z_i) < 4)
 	{
 		tmp_zr = (data->z_r * data->z_r) - (data->z_i * data->z_i) + data->c_r;
@@ -42,12 +40,41 @@ void	ft_julia_set(t_data *data)
 		data->x = 0;
 		while (data->x < data->width)
 		{
-			ft_card_to_comp(data);
+			ft_card_to_comp_jul(data);
 			i = ft_julia(data);
 			mlx_put_pixel(data->img, data->x,
-				data->y, ft_color(i, data->color));
+				data->y, ft_color(i, data->color, data));
 			data->x++;
 		}
 		data->y++;
+	}
+}
+
+void	ft_set_julia(t_data *data)
+{
+	if (data->julia_type == 0)
+	{
+		data->c_r = -0.12;
+		data->c_i = -0.77;
+	}
+	else if (data->julia_type == 1)
+	{
+		data->c_r = -0.79;
+		data->c_i = 0.15;
+	}
+	else if (data->julia_type == 2)
+	{
+		data->c_r = -0.162;
+		data->c_i = 1.04;
+	}
+	else if (data->julia_type == 3)
+	{
+		data->c_r = 0.3;
+		data->c_i = -0.1;
+	}
+	else if (data->julia_type == 4)
+	{
+		data->c_r = -1.476;
+		data->c_i = 0.0;
 	}
 }
