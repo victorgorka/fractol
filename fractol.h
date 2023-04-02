@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/20 20:30:07 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:59:10 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@
 # include <math.h>
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
-
 //************************** DEFINITIONS *************************************
-# define WIDTH 1700
-# define HEIGHT 1400
-# define MAX_ITER 100
-# define MAX_RE 1.0
-# define MIN_RE -2.0
-# define MAX_I 1.2
-# define MIN_I -1.2
-
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	char		fract_type;
+	int			julia_type;
 	int			x;
 	int			y;
 	int			color;
+	int			width;
+	int			height;
+	int			max_iter;
+	float		max_re;
+	float		min_re;
+	float		max_i;
+	float		min_i;
 	float		z_r;
 	float		z_i;
 	float		c_r;	
@@ -43,7 +43,13 @@ typedef struct s_data
 }	t_data;
 
 //*************************** FUNCTIONS **************************************
-void	ft_mandelbrot_set(t_data *data);
-int		ft_color(int i, int color);
+int		ft_color(int i, int color, t_data *data);
 float	ft_module(float r, float i);
+void	ft_mandelbrot_set(t_data *data);
+void	ft_julia_set(t_data *data);
+void	ft_card_to_comp(t_data *data);
+void	ft_card_to_comp_jul(t_data *data);
+void	ft_exit(int n);
+void	ft_set_julia(t_data *data);
+void	ft_select_fractal(t_data *data);
 #endif

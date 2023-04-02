@@ -6,60 +6,96 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/03/20 21:12:10 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/02 20:04:41 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-float	ft_module(float r, float i)
-{
-	return ((r * r) + (i * i));
-}
-
-int	ft_color(int i, int color)
-{
-	int	color_set[5] = {0x80ff80ff, 0x8a601dff, 0xe6c329ff,
-		0xd9331aff, 0x1932c2ff};
-
-	if (i >= MAX_ITER - 1)
-		return (0x000000ff);
-	else
-		return (color_set[(color % 5)] + (i * 0x10100000));
-}
 
 void	leaks(void)
 {
 	system("leaks fractol");
 }
 
-void	ft_key_hook(mlx_key_data_t keydata, void *param)
+static void	ft_key_hook(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 		exit(0);
 	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
 	{
 		((t_data *)param)->color++;
-		ft_mandelbrot_set((t_data *)param);
+		ft_select_fractal((t_data *)param);
 	}
+}
+
+void	ft_select_fractal(t_data *data)
+{
+	if (data->fract_type == 'm')
+		ft_mandelbrot_set(data);
+	else if (data->fract_type == 'j')
+	{
+		ft_set_julia(data);
+		ft_julia_set(data);
+	}
+}
+
+void	ft_check_input(t_data *data)
+{
+	char	*buff;
+
+	buff = get_next_line(0);
+	if (buff[0] == 'j' && buff[1] >= '0' && buff[1] <= '4'
+		&& ft_strlen(buff) == 3)
+	{
+		data->fract_type = 'j';
+		if (buff[1] == '0')
+			data->julia_type = 0;
+		else if (buff[1] == '1')
+			data->julia_type = 1;
+		else if (buff[1] == '2')
+			data->julia_type = 2;
+		else if (buff[1] == '3')
+			data->julia_type = 3;
+		else if (buff[1] == '4')
+			data->julia_type = 4;
+	}
+	else if (!ft_strncmp(buff, "m\n", ft_strlen(buff)))
+		data->fract_type = 'm';
+	else if (ft_strlen(buff) == 1)
+		ft_exit(0);
+	else
+		ft_exit(1);
+}
+
+void	ft_init_data(t_data *data)
+{
+	data->color = 0;
+	data->width = 1700;
+	data->height = 1400;
+	data->max_iter = 100;
+	data->max_re = 1.0;
+	data->min_re = -2.0;
+	data->max_i = 1.2;
+	data->min_i = -1.2;
 }
 
 int32_t	main(void)
 {
 	t_data		data;
 
-	data.color = 0;
-	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
+	ft_check_input(&data);
+	ft_init_data(&data);
+	data.mlx = mlx_init(data.width, data.height, "MLX42", true);
 	if (!data.mlx)
 		return (EXIT_FAILURE);
-	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+	data.img = mlx_new_image(data.mlx, data.width, data.height);
 	ft_memset(data.img->pixels, 255,
 		data.img->width * data.img->height * sizeof(int));
-	ft_mandelbrot_set(&data);
 	mlx_image_to_window(data.mlx, data.img, 0, 0);
+	ft_select_fractal(&data);
 	mlx_key_hook(data.mlx, &ft_key_hook, &data);
 	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
 	atexit(leaks);
+	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }
