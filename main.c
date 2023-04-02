@@ -6,27 +6,11 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/02 20:04:41 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:04:16 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	leaks(void)
-{
-	system("leaks fractol");
-}
-
-static void	ft_key_hook(mlx_key_data_t keydata, void *param)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
-		exit(0);
-	if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
-	{
-		((t_data *)param)->color++;
-		ft_select_fractal((t_data *)param);
-	}
-}
 
 void	ft_select_fractal(t_data *data)
 {
@@ -77,6 +61,13 @@ void	ft_init_data(t_data *data)
 	data->min_re = -2.0;
 	data->max_i = 1.2;
 	data->min_i = -1.2;
+	if (data->fract_type == 'j')
+	{
+		data->max_re = 1.5;
+		data->min_re = -1.5;
+		data->max_i = 2.2;
+		data->min_i = -2.2;
+	}
 }
 
 int32_t	main(void)
@@ -94,8 +85,8 @@ int32_t	main(void)
 	mlx_image_to_window(data.mlx, data.img, 0, 0);
 	ft_select_fractal(&data);
 	mlx_key_hook(data.mlx, &ft_key_hook, &data);
+	mlx_scroll_hook(data.mlx, &ft_scroll, &data);
 	mlx_loop(data.mlx);
-	atexit(leaks);
 	mlx_terminate(data.mlx);
 	return (EXIT_SUCCESS);
 }

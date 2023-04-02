@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/02 19:59:10 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:56:41 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,7 @@ void	ft_card_to_comp_jul(t_data *data);
 void	ft_exit(int n);
 void	ft_set_julia(t_data *data);
 void	ft_select_fractal(t_data *data);
+void	ft_scroll(double xdelta, double ydelta, void *param);
+void	ft_key_hook(mlx_key_data_t keydata, void *param);
+void	ft_arrows(mlx_key_data_t keydata, t_data *data);
 #endif
