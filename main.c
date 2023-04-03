@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/02 21:04:16 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/03 21:12:12 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ void	ft_check_input(t_data *data)
 void	ft_init_data(t_data *data)
 {
 	data->color = 0;
-	data->width = 1700;
-	data->height = 1400;
-	data->max_iter = 100;
+	data->width = 1000;
+	data->height = 700;
+	data->max_iter = 50;
 	data->max_re = 1.0;
 	data->min_re = -2.0;
-	data->max_i = 1.2;
 	data->min_i = -1.2;
+	data->max_i = data->min_i + (data->max_re - data->min_re) * data->height / data->width;
 	if (data->fract_type == 'j')
 	{
 		data->max_re = 1.5;

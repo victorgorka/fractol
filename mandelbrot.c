@@ -6,11 +6,16 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:17:12 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/02 18:26:29 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:32:32 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+//z_r < 0
+//abs z_r
+//z_i < 0
+//abs z_i
 
 static int	ft_mandelbrot(t_data *data)
 {
@@ -22,7 +27,7 @@ static int	ft_mandelbrot(t_data *data)
 	data->z_i = data->c_i;
 	while (i < data->max_iter && ft_module(data->z_r, data->z_i) < 4)
 	{
-		tmp_r = (data->z_r * data->z_r) - (data->z_i * data->z_i) + data->c_r;
+		tmp_r = (data->z_r * data->z_r) - (data->z_i * data->z_i) + data->c_r; //- c_r
 		data->z_i = 2 * data->z_r * data->z_i + data->c_i;
 		data->z_r = tmp_r;
 		i++;
