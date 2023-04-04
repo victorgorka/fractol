@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/04 14:42:43 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:02:38 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,17 @@ void	ft_init_data(t_data *data)
 	{
 		data->max_re = 1.5;
 		data->min_re = -1.5;
-		data->max_i = 2.2;
-		data->min_i = -2.2;
+		data->max_i = data->min_i + (data->max_re - data->min_re)
+			* data->height / data->width;
+		data->min_i = -1.0;
+	}
+	else if (data->fract_type == 'b')
+	{
+		data->max_re = 2.5;
+		data->min_re = -1.5;
+		data->max_i = data->min_i + (data->max_re - data->min_re)
+			* data->height / data->width;
+		data->min_i = -0.5;
 	}
 }
 

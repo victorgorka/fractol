@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:56:55 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/04 14:40:06 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:47:45 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	ft_exit(int n, char *buff)
 	if (n == 0)
 	{
 		free(buff);
-		ft_putstr_fd("m = Mandelbrot\nj[0..5] = fractales de Julia\n", 1);
+		ft_putstr_fd("m = Mandelbrot\n", 1);
+		ft_putstr_fd("j[0..3] = Julia variants\n", 1);
+		ft_putstr_fd("b = Burningship\n", 1);
 		exit(EXIT_SUCCESS);
 	}
 	else
