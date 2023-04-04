@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:56:55 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/02 19:59:33 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:40:06 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,17 @@ void	ft_card_to_comp_jul(t_data	*data)
 		* (data->max_i - data->min_i) / (data->height - 1);
 }
 
-void	ft_exit(int n)
+void	ft_exit(int n, char *buff)
 {
 	if (n == 0)
 	{
+		free(buff);
 		ft_putstr_fd("m = Mandelbrot\nj[0..5] = fractales de Julia\n", 1);
 		exit(EXIT_SUCCESS);
 	}
 	else
 	{
+		free(buff);
 		ft_putstr_fd("Error, argumento no valido\n", 2);
 		exit(EXIT_FAILURE);
 	}
