@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:12:55 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/02 19:47:46 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:40:19 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,5 @@ void	ft_set_julia(t_data *data)
 	{
 		data->c_r = 0.3;
 		data->c_i = -0.1;
-	}
-	else if (data->julia_type == 4)
-	{
-		data->c_r = -1.476;
-		data->c_i = 0.0;
 	}
 }

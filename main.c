@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/03 21:12:12 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:42:43 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_select_fractal(t_data *data)
 		ft_set_julia(data);
 		ft_julia_set(data);
 	}
+	else if (data->fract_type == 'b')
+		ft_burningship_set(data);
 }
 
 void	ft_check_input(t_data *data)
@@ -40,15 +42,16 @@ void	ft_check_input(t_data *data)
 			data->julia_type = 2;
 		else if (buff[1] == '3')
 			data->julia_type = 3;
-		else if (buff[1] == '4')
-			data->julia_type = 4;
 	}
 	else if (!ft_strncmp(buff, "m\n", ft_strlen(buff)))
 		data->fract_type = 'm';
+	else if (!ft_strncmp(buff, "b\n", ft_strlen(buff)))
+		data->fract_type = 'b';
 	else if (ft_strlen(buff) == 1)
-		ft_exit(0);
+		ft_exit(0, buff);
 	else
-		ft_exit(1);
+		ft_exit(1, buff);
+	free(buff);
 }
 
 void	ft_init_data(t_data *data)
@@ -56,11 +59,12 @@ void	ft_init_data(t_data *data)
 	data->color = 0;
 	data->width = 1000;
 	data->height = 700;
-	data->max_iter = 50;
+	data->max_iter = 100;
 	data->max_re = 1.0;
 	data->min_re = -2.0;
 	data->min_i = -1.2;
-	data->max_i = data->min_i + (data->max_re - data->min_re) * data->height / data->width;
+	data->max_i = data->min_i + (data->max_re - data->min_re)
+		* data->height / data->width;
 	if (data->fract_type == 'j')
 	{
 		data->max_re = 1.5;

@@ -6,7 +6,7 @@
 #    By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 16:49:46 by vde-prad          #+#    #+#              #
-#    Updated: 2023/04/02 20:53:03 by vde-prad         ###   ########.fr        #
+#    Updated: 2023/04/04 14:21:41 by vde-prad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,14 @@ SRCS	= 	main.c \
 			mandelbrot.c \
 			julia.c \
 			utils.c \
+			burningship.c \
 			hooks.c
 
 OBJS	= ${SRCS:.c=.o}
 NAME	= fractol
 LIBFT	= libft/libft.a
-MLX_L	= -L MLX42 -l mlx42 
-GLFW_L	= -L /sgoinfre/goinfre/Perso/vde-prad/homebrew/Cellar/glfw/3.3.7/lib/ -l glfw 
+MLX_L	= -L MLX42 -l mlx42
+GLFW_L	= -L /sgoinfre/goinfre/Perso/vde-prad/homebrew/Cellar/glfw/3.3.7/lib/ -l glfw
 INCLUD	= -I MLX42/include
 CFLAGS	= -Wall -Werror -Wextra
 
@@ -31,7 +32,7 @@ libft:
 	@${MAKE} -C ./libft
 
 mlx_lib:
-	@echo "COMPILANDO MLX42\n"	
+	@echo "COMPILANDO MLX42\n"
 	@${MAKE} -C ./MLX42
 
 ${NAME}: ${OBJS}
