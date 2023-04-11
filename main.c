@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/04 15:54:15 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/11 16:50:00 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	ft_init_data(t_data *data)
 	data->width = 1000;
 	data->height = 700;
 	data->max_iter = 80;
-	data->max_re = 1.0;
-	data->min_re = -2.0;
+	data->max_re = 1.2;
+	data->min_re = -2.2;
 	data->min_i = -1.2;
 	data->max_i = 1.2;
 	if (data->fract_type == 'j')
@@ -92,8 +92,6 @@ int32_t	main(void)
 	if (!data.mlx)
 		return (EXIT_FAILURE);
 	data.img = mlx_new_image(data.mlx, data.width, data.height);
-	ft_memset(data.img->pixels, 255,
-		data.img->width * data.img->height * sizeof(int));
 	mlx_image_to_window(data.mlx, data.img, 0, 0);
 	ft_select_fractal(&data);
 	mlx_key_hook(data.mlx, &ft_key_hook, &data);

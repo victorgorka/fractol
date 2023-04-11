@@ -6,7 +6,7 @@
 #    By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 16:49:46 by vde-prad          #+#    #+#              #
-#    Updated: 2023/04/04 14:21:41 by vde-prad         ###   ########.fr        #
+#    Updated: 2023/04/04 16:25:42 by vde-prad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,16 +28,16 @@ CFLAGS	= -Wall -Werror -Wextra
 all: libft mlx_lib ${NAME}
 
 libft:
-	@echo "COMPILING LIBFT"
 	@${MAKE} -C ./libft
+	@echo "COMPILING LIBFT"
 
 mlx_lib:
-	@echo "COMPILANDO MLX42\n"
 	@${MAKE} -C ./MLX42
+	@echo "COMPILANDO MLX42\n"
 
 ${NAME}: ${OBJS}
-	@echo "COMPILANDO fractol\n"
 	@gcc ${CFLAGS} ${OBJS} ${LIBFT} ${MLX_L} ${GLFW_L} ${INCLUD} -o ${NAME}
+	@echo "COMPILANDO fractol\n"
 
 re: fclean all
 

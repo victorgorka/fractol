@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 20:52:22 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/04 14:40:39 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/11 17:43:03 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	ft_key_hook(mlx_key_data_t keydata, void *param)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
+	{
+		mlx_terminate(((t_data *)param)->mlx);
 		exit(0);
+	}
 	else if (keydata.key == MLX_KEY_C && keydata.action == MLX_RELEASE)
 	{
 		((t_data *)param)->color++;
