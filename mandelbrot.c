@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:17:12 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/04 14:40:15 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:41:04 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	ft_mandelbrot_set(t_data *data)
 	int	i;
 
 	data->y = 0;
-	while (data->y < data->height)
+	while (data->y < HEIGHT)
 	{
 		data->x = 0;
-		while (data->x < data->width)
+		while (data->x < WIDTH)
 		{
 			ft_card_to_comp(data);
 			i = ft_mandelbrot(data);

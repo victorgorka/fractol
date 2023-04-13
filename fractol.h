@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 17:42:37 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/04 14:39:58 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:38:40 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 //************************** DEFINITIONS *************************************
+# define WIDTH 1000
+# define HEIGHT 700
+
 typedef struct s_data
 {
 	mlx_t		*mlx;

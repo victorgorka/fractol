@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/11 16:50:00 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/13 13:36:49 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,29 @@ void	ft_check_input(t_data *data)
 	free(buff);
 }
 
+/*
+	- The necessary fractals data is initialized
+	- Depending of which fractal is selected
+	- In case of Burningship fractal, 'max_i' is stablished in a different way.
+		- The sum has two addend:
+			1st (data->min_i)
+			2nd ((data->max_re - data->min_re) * HEIGHT / WIDTH)
+		- In the 2nd we got the total lenght of the real part of the complex
+		  plane (ex. 3.4 total Real axis) in the first subtract in the parenthesis.
+		  But for the Img axis, we are going to stablish a proportion of approx 2/3
+		  of real axis. That's why we do the product of the total lenght of Real axis
+		  (ex. 3.4) and the quotient of HEIGHT / WIDTH (2/3 approx in my case). With
+		  the whole operation (the product of the subtraction and the quotient) we got
+		  the total lenght of Imaginary axis
+		- The first addend is necessary because in the 2nd addend we only got the total
+		  lenght of Img axis, but we only want the upper half of the Img axis, that is,
+		  'max_i'. That's why we sum (but its negative, so its a subtract) min_i to the
+		  total lenght of Img axis that we got in the second addend.
+	Good luck in your fract-ol implementation :]
+*/
 void	ft_init_data(t_data *data)
 {
 	data->color = 0;
-	data->width = 1000;
-	data->height = 700;
 	data->max_iter = 80;
 	data->max_re = 1.2;
 	data->min_re = -2.2;
@@ -70,7 +88,7 @@ void	ft_init_data(t_data *data)
 		data->min_re = -1.7;
 		data->min_i = -1.2;
 		data->max_i = data->min_i + (data->max_re - data->min_re)
-			* data->height / data->width;
+			* HEIGHT / WIDTH;
 	}
 	else if (data->fract_type == 'b')
 	{
@@ -78,20 +96,30 @@ void	ft_init_data(t_data *data)
 		data->min_re = -1.5;
 		data->min_i = -1.0;
 		data->max_i = data->min_i + (data->max_re - data->min_re)
-			* data->height / data->width;
+			* HEIGHT / WIDTH;
 	}
 }
 
+/*
+	- t_data type structure is declared, its initialized
+	- the input from CLI is checked in in ft_check_input
+	- MLX internal data is initialized and a new image is created.
+	- mlx_image_to_window: its used to display the image in a window.
+	- mlx_key_hook: its used to control the key use.
+	- mlx_scroll_hook: its used to control scroll use.
+	- mlx_loop: maintain the the program in execution until we close the window.
+	- mlx_terminate: free MLX data memory.
+*/
 int32_t	main(void)
 {
 	t_data		data;
 
 	ft_check_input(&data);
 	ft_init_data(&data);
-	data.mlx = mlx_init(data.width, data.height, "MLX42", true);
+	data.mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true);
 	if (!data.mlx)
 		return (EXIT_FAILURE);
-	data.img = mlx_new_image(data.mlx, data.width, data.height);
+	data.img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(data.mlx, data.img, 0, 0);
 	ft_select_fractal(&data);
 	mlx_key_hook(data.mlx, &ft_key_hook, &data);

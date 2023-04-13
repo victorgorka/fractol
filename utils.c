@@ -6,7 +6,7 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:56:55 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/04 14:47:45 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:54:48 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ int	ft_color(int iter, int color, t_data *data)
 void	ft_card_to_comp(t_data	*data)
 {
 	data->c_r = data->min_re + data->x
-		* (data->max_re - data->min_re) / (data->width - 1);
+		* (data->max_re - data->min_re) / (WIDTH - 1);
 	data->c_i = data->max_i - data->y
-		* (data->max_i - data->min_i) / (data->height - 1);
+		* (data->max_i - data->min_i) / (HEIGHT - 1);
 }
 
 void	ft_card_to_comp_jul(t_data	*data)
 {
 	data->z_r = data->min_re + data->x
-		* (data->max_re - data->min_re) / (data->width - 1);
+		* (data->max_re - data->min_re) / (WIDTH - 1);
 	data->z_i = data->max_i - data->y
-		* (data->max_i - data->min_i) / (data->height - 1);
+		* (data->max_i - data->min_i) / (HEIGHT - 1);
 }
 
 void	ft_exit(int n, char *buff)
