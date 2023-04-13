@@ -6,12 +6,16 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:55:19 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/13 13:36:49 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/13 17:05:36 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/*
+	- Each time is necessary to render the fractal, this function is called
+	  and will render the fractal type that was selected in the CLI
+*/
 void	ft_select_fractal(t_data *data)
 {
 	if (data->fract_type == 'm')
@@ -25,6 +29,12 @@ void	ft_select_fractal(t_data *data)
 		ft_burningship_set(data);
 }
 
+/*
+	- The input from CLI is read by get_next_line function
+	- Depending on input, the variable 'fract_type' and
+	  'julia_type' is set
+	- If input is not correct, the control passes to ft_exit
+*/
 void	ft_check_input(t_data *data)
 {
 	char	*buff;

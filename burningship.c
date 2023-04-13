@@ -6,12 +6,20 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:57:38 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/13 12:40:14 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:26:01 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/*
+	- It consist to initialize the Z values to 0 and C values are the complex
+	  coordinates of the pixel is iterated
+	- We iterate the 'Zn+1 = Zn^2 + C' succession. But we use the absolute values
+	  of Z.
+	- Other difference with Mandelbrot set is that C values are subtracted instead
+	  of sumed.
+*/
 static int	ft_burningship(t_data *data)
 {
 	float	tmp_r;
@@ -20,7 +28,7 @@ static int	ft_burningship(t_data *data)
 	i = 0;
 	data->z_r = 0;
 	data->z_i = 0;
-	while (i < data->max_iter && ft_module(data->z_r, data->z_i) < 4)
+	while (i < data->max_iter && data->z_r + data->z_i < 2)
 	{
 		if (data->z_r < 0)
 			data->z_r = data->z_r * -1;
@@ -36,6 +44,10 @@ static int	ft_burningship(t_data *data)
 	return (i);
 }
 
+/*
+	- It iterate each pixel, and aplly it ft_burningship, to determine what color
+	  print in that pixel.
+*/
 void	ft_burningship_set(t_data *data)
 {
 	int	i;
@@ -46,7 +58,7 @@ void	ft_burningship_set(t_data *data)
 		data->x = 0;
 		while (data->x < WIDTH)
 		{
-			ft_card_to_comp(data);
+			ft_cart_to_comp(data);
 			i = ft_burningship(data);
 			mlx_put_pixel(data->img, data->x,
 				data->y, ft_color(i, data->color, data));

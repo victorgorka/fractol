@@ -6,12 +6,21 @@
 /*   By: vde-prad <vde-prad@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:12:55 by vde-prad          #+#    #+#             */
-/*   Updated: 2023/04/13 12:40:40 by vde-prad         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:22:31 by vde-prad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/*
+	- It's the same as Mandelbrot set, but C is not the complex coordinates of
+	  the pixel we are iterating. It's a prestablished value of the complex
+	  plane I chose of interesting Julia sets.
+	- A very interesting solution to do this is to let the user to enter
+	  by CLI 'c_r' and 'c_i' to generate a different Julia set dependending
+	  on those inputs. I needed to finish this project as soon as possible
+	  and I didnt try.
+*/
 static int	ft_julia(t_data *data)
 {
 	float	tmp_zr;
@@ -30,6 +39,10 @@ static int	ft_julia(t_data *data)
 	return (i);
 }
 
+/*
+	- It iterate each pixel, and aplly it ft_burningship, to determine what color
+	  print in that pixel.
+*/
 void	ft_julia_set(t_data *data)
 {
 	int	i;
@@ -40,7 +53,7 @@ void	ft_julia_set(t_data *data)
 		data->x = 0;
 		while (data->x < WIDTH)
 		{
-			ft_card_to_comp_jul(data);
+			ft_cart_to_comp_jul(data);
 			i = ft_julia(data);
 			mlx_put_pixel(data->img, data->x,
 				data->y, ft_color(i, data->color, data));
