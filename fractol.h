@@ -20,8 +20,9 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 //************************** DEFINITIONS *************************************
-# define WIDTH 1000
-# define HEIGHT 700
+# define WIDTH 800
+# define HEIGHT 500
+# define MAX_ITER 150
 
 typedef struct s_data
 {

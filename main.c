@@ -87,7 +87,7 @@ void	ft_check_input(t_data *data)
 void	ft_init_data(t_data *data)
 {
 	data->color = 0;
-	data->max_iter = 80;
+	data->max_iter = MAX_ITER;
 	data->max_re = 1.2;
 	data->min_re = -2.2;
 	data->min_i = -1.2;

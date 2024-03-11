@@ -21,7 +21,7 @@ OBJS	= ${SRCS:.c=.o}
 NAME	= fractol
 LIBFT	= libft/libft.a
 MLX_L	= -L MLX42 -l mlx42
-GLFW_L	= -L /sgoinfre/goinfre/Perso/vde-prad/homebrew/Cellar/glfw/3.3.7/lib/ -l glfw
+GLFW_L	= -L /sgoinfre/goinfre/Perso/vde-prad/homebrew/Cellar/glfw/3.4/lib/ -l glfw
 INCLUD	= -I MLX42/include
 CFLAGS	= -Wall -Werror -Wextra
 
